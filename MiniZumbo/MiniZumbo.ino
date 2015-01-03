@@ -140,8 +140,17 @@ void MSP_Cmd_MSP_SET_RAW_RC_TINY( void )
     Speed = (Pitch - 1500) / 2;
     Dir   = (Roll  - 1500) / 2;
 
-    Pwm_L = Speed + Dir;
-    Pwm_R = Speed - Dir;
+
+    if( Speed > 0 )
+    {
+        Pwm_L = Speed + Dir/2;
+        Pwm_R = Speed - Dir/2;
+    }
+    else
+    {
+        Pwm_L = Speed - Dir/2;
+        Pwm_R = Speed + Dir/2;        
+    }
 
 
     Pwm_Left  = Pwm_L;
